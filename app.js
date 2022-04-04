@@ -26,12 +26,12 @@ app.get('/add_post',(req,res)=>{
     res.render("add_post")
 })
 
-app.get('/add_post',(req,res)=>{
-    res.render("add_post")
-})
-
 app.get('/post',(req,res)=>{
     res.render("post")
+})
+
+app.get('*',(req,res)=>{
+    res.send('<h2> 404 Not Found</h2>')
 })
 
 app.listen(port,()=>{
