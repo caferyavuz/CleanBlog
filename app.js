@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const app = express()
 const port = 3000
 
-const Photo = require('./models/Photo')
+const Post = require('./models/Post')
 
 mongoose.connect('mongodb://localhost/cleanblog-test-db');
 
@@ -19,16 +19,16 @@ app.use(express.json())
 
 
 app.get('/',async(req,res)=>{
-    const photos = await Photo.find()
+    const posts = await Post.find()
     res.render("index",{
-        photos:photos
+        posts:posts
     })
 })
 
 app.get('/index',async(req,res)=>{
-    const photos = await Photo.find()
+    const posts = await Post.find()
     res.render("index",{
-        photos:photos
+        posts:posts
     })
 })
 
@@ -40,9 +40,11 @@ app.get('/add_post',(req,res)=>{
     res.render("add_post")
 })
 
-app.get('/post',(req,res)=>{
-    
-    res.render("post")
+app.get('/post/:id', async(req,res)=>{
+    const post = await Post.findById(req.params.id)
+    res.render("post",{
+        post:post
+    })
 })
 
 app.get('*',(req,res)=>{
@@ -50,7 +52,7 @@ app.get('*',(req,res)=>{
 })
 
 app.post('/addPost',async(req,res)=>{
-    await Photo.create(req.body)
+    await Post.create(req.body)
     res.redirect("/index")
 })
 
