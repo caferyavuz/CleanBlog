@@ -27,6 +27,10 @@
           <p> <%= post.detail %> </p>
         </div>
       </div>
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <a href="/edit_post/<%- post.id -%>"><button class="btn btn-primary" >Güncelle</button></a>
+        <a href="/post/<%- post.id -%>?_method=DELETE" onclick="confirm('Onaylıyor musun?')"><button class="btn btn-primary" >Sil</button></a>
+      </div>
     </div>
   </article>
 
